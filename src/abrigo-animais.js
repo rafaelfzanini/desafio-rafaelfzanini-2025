@@ -35,7 +35,7 @@ class AbrigoAnimais {
       }
     }
 
-    for (let i = 0; i < listaPessoa1.length; i++) {
+    for (let i = 0; i < listaPessoa1.length; i++){
       for (let j = i + 1; j < listaPessoa1.length; j++) {
         if (listaPessoa1[i] == listaPessoa1[j]) {
           return {erro: 'Brinquedo Inválido'};
@@ -43,7 +43,7 @@ class AbrigoAnimais {
       }
     }
 
-    for (let i = 0; i < listaPessoa2.length; i++) {
+    for (let i = 0; i < listaPessoa2.length; i++){
       for (let j = i + 1; j < listaPessoa2.length; j++) {
         if (listaPessoa2[i] == listaPessoa2[j]) {
           return {erro: 'Brinquedo Inválido'};
@@ -51,7 +51,18 @@ class AbrigoAnimais {
       }
     }
 
+    //ordem alfabetica
+    listaAnimais.sort();
+
+    //saida de dados
+    let listaSaida = [];
+    for (let i = 0; i < listaAnimais.length; i++){
+      listaSaida[i] = listaAnimais[i] + " - abrigo";
+    }
+    return {lista: listaSaida};
+
+
   }
 }
 
-export { AbrigoAnimais as AbrigoAnimais };
+export {AbrigoAnimais as AbrigoAnimais};
