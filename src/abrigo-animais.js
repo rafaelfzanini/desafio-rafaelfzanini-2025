@@ -1,4 +1,5 @@
 import { Pessoa } from "./pessoa";
+import { Animal } from "./animal";
 
 class AbrigoAnimais {
   
@@ -71,11 +72,18 @@ class AbrigoAnimais {
       new Animal('Loco', 'jabuti', ['SKATE', 'RATO'])
     ]
 
+    //ordem alfabetica
+    listaAnimais.sort();
+    
     //resultado
     let listaSaida = [];
 
+    //contador de numero animais 
+    let quantidadePessoa1 = 0;
+    let quantidadePessoa2 = 0;
+
     //colocando todos no abrigo
-     for (let i = 0; i < listaAnimais.length; i++){
+    for (let i = 0; i < listaAnimais.length; i++){
       let animalNome = listaAnimais[i];
       let dono = 'abrigo';
 
@@ -85,22 +93,31 @@ class AbrigoAnimais {
       let objetoAnimal = null;  //variável que guarda objeto animal
       for (let j = 0; j < animais.length; j++){
         if (animais[j].nome == animalNome){
-        objetoAnimal = animais[j];
-        break;
+          objetoAnimal = animais[j];
+          break;
         }
-      } 
-    }  
-    
-    if (!objetoAnimal){
-      return {erro: 'Animal Inválido'};
-    }  
+      }  
+      if (!objetoAnimal){
+        return {erro: 'Animal Inválido'};
+      }  
+      
+      //verifica quem pode levar animal
+      let pessoa1Pode = pessoa1.temBrinquedos(objetoAnimal.brinquedos);
+      let pessoa2Pode = pessoa2.temBrinquedos(objetoAnimal.brinquedos);
 
+      if (pessoa1Pode && !pessoa2Pode){
+        dono = 'pessoa 1';
+      }
+      else if (!pessoa1Pode && pessoa2Pode){
+        dono = 'pessoa 2';
+      }
+      else{
+        dono = 'abrigo';
+      }
 
-    //verifica quem pode levar animal
-    
-    //ordem alfabetica
-    listaAnimais.sort();
-  
+      listaSaida[listaSaida.length] = objetoAnimal.nome + ' - ' + dono; 
+    } 
+
     //saida de dados
     return {lista: listaSaida};
   }
