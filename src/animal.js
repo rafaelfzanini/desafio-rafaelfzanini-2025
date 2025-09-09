@@ -1,11 +1,11 @@
-class Animal {
+class Animal{
     constructor (nome, especie, brinquedos){
         this.nome = nome;
         this.especie = especie;
-        this.brinquedos = []; //array 
+        this.brinquedos = []; //Array que armazena brinquedos do animal
 
-        //Passa todos os brinquedos para array
-        for (let i = 0; i < brinquedos.length; i++) {
+        //Adiciona brinquedos ao array
+        for (let i = 0; i < brinquedos.length; i++){
             this.brinquedos.push(brinquedos[i].trim().toUpperCase());
         }
     }
