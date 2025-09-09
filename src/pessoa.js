@@ -11,16 +11,18 @@ class Pessoa{
 
     //método que verifica se os brinquedos batem 
     temBrinquedos (brinquedosAnimal) {
-        let contador = 0;
+        let indicePessoa = -1;
 
         for (let i = 0; i < brinquedosAnimal.length; i ++){
             let encontrado = false;
                 
-            for (let j = 0; contador < this.brinquedos.length; contador ++){
-                if (this.brinquedos[contador] == brinquedosAnimal[i]){
+           for (let j = indicePessoa + 1; j < this.brinquedos.length; j++) {
+                if (this.brinquedos[j] === brinquedosAnimal[i]) {
+                    indicePessoa = j;
                     encontrado = true;
                     break;
                 }
+                
             }
             if (!encontrado){
                 return false;
@@ -29,4 +31,4 @@ class Pessoa{
         return true;
     }
 }
-export {Pessoa}
+export { Pessoa };

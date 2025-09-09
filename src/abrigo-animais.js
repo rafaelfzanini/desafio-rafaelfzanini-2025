@@ -1,7 +1,7 @@
 import { Pessoa } from "./pessoa";
 import { Animal } from "./animal";
 
-class AbrigoAnimais {
+  class AbrigoAnimais {
   
   //método inicial
   encontraPessoas(brinquedosPessoa1, brinquedosPessoa2, ordemAnimais) {
@@ -33,7 +33,7 @@ class AbrigoAnimais {
     for (let i = 0; i < listaAnimais.length; i++){
       for (let j = i + 1; j < listaAnimais.length; j++){
         if (listaAnimais[i] == listaAnimais[j]){
-          return {erro: 'Animal Inválido'}
+          return {erro: 'Animal inválido'}
         }
       }
     }
@@ -41,7 +41,7 @@ class AbrigoAnimais {
     for (let i = 0; i < listaPessoa1.length; i++){
       for (let j = i + 1; j < listaPessoa1.length; j++) {
         if (listaPessoa1[i] == listaPessoa1[j]) {
-          return {erro: 'Brinquedo Inválido'};
+          return {erro: 'Brinquedo inválido'};
         }
       }
     }
@@ -49,7 +49,7 @@ class AbrigoAnimais {
     for (let i = 0; i < listaPessoa2.length; i++){
       for (let j = i + 1; j < listaPessoa2.length; j++) {
         if (listaPessoa2[i] == listaPessoa2[j]) {
-          return {erro: 'Brinquedo Inválido'};
+          return {erro: 'Brinquedo inválido'};
         }
       }
     } 
@@ -98,21 +98,43 @@ class AbrigoAnimais {
         }
       }  
       if (!objetoAnimal){
-        return {erro: 'Animal Inválido'};
-      }  
-      
-      //verifica quem pode levar animal
-      let pessoa1Pode = pessoa1.temBrinquedos(objetoAnimal.brinquedos);
-      let pessoa2Pode = pessoa2.temBrinquedos(objetoAnimal.brinquedos);
+        return {erro: 'Animal inválido'};
+      } 
 
-      if (pessoa1Pode && !pessoa2Pode){
-        dono = 'pessoa 1';
-      }
-      else if (!pessoa1Pode && pessoa2Pode){
-        dono = 'pessoa 2';
+      // Verifica quem pode adotar
+      let pessoa1Pode;
+      let pessoa2Pode;
+
+      
+      //teste do Loco 
+      if (objetoAnimal.nome == 'Loco'){
+        pessoa1Pode = quantidadePessoa1 > 0 && quantidadePessoa1 < 3;
+        pessoa2Pode = quantidadePessoa2 > 0 && quantidadePessoa2 < 3;
       }
       else{
+        pessoa1Pode = pessoa1.temBrinquedos(objetoAnimal.brinquedos) &&quantidadePessoa1< 3;
+        pessoa2Pode = pessoa2.temBrinquedos(objetoAnimal.brinquedos) && quantidadePessoa2 < 3;
+      }
+
+
+       if (pessoa1Pode && pessoa2Pode) {
         dono = 'abrigo';
+      } else if (pessoa1Pode) {
+        dono = 'pessoa 1';
+      } else if (pessoa2Pode) {
+        dono = 'pessoa 2';
+      } else {
+        dono = 'abrigo';
+      }
+    
+
+
+      //verifica quem pode levar animal
+      if (dono == 'pessoa 1'){
+        quantidadePessoa1++;
+      }
+      if (dono == 'pessoa 2'){
+        quantidadePessoa2++;  
       }
 
       listaSaida[listaSaida.length] = objetoAnimal.nome + ' - ' + dono; 
@@ -122,5 +144,4 @@ class AbrigoAnimais {
     return {lista: listaSaida};
   }
 }
-
 export {AbrigoAnimais as AbrigoAnimais};
